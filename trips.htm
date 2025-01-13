@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boaz and Sport</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .section {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .section img {
+            max-width: 100%;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .video {
+            max-width: 100%;
+        }
+        h1 {
+            text-align: center;
+        }
+        .top-section img {
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+        .top-section video {
+            height: 450px; /* Adjust the width as needed */
+        }
+
+        .nicks img {
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        .football img {
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        .acro img {
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        .acro video {
+            width: 700px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 10px; /* Adjust the gap as needed */
+        }
+</style>
+</head>
+<body>
+    <h1>Boaz and Sport</h1>
+
+    <!-- Top Section -->
+    <div class="section top-section" id="top-section">
+        <center><img src="images/boaztv.jpg" onclick="toggleVisibility('top-content')" alt="Boaz Photo"></center>
+        <div id="top-content" class="hidden">
+            <p>Boaz liked Television. He was mindful about selecting TV shows to watch, had a deep passion for sports. In high school, he was determined to join the Athletes class, even though he was more of a brainy kid than a sporty one. 
+                Football one was of his favorite conversation topics, always up to date with the latest news and scores.
+                <br/><br/>This page celebrates the three teams he loved most and highlights one of his favorite activities: acroyoga. 
+                He had a tough run with his teams, often supporting those that brought him much frustration. 
+                Yet, for better or worse, his unwavering devotion to these teams, despite their many setbacks, 
+                was a perfect reflection of his character.</p>
+            <video class="video" controls>
+                <source src="images/pullups.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+    </div>
+
+    <!-- New York Knicks Section -->
+    <div class="section nicks" id="nicks-section">
+        <center><img src="images/nicks.jpg" onclick="toggleVisibility('nicks-content')" alt="New York Knicks"></center>
+        <div id="nicks-content" class="hidden">
+            <p>Boaz was a dedicated fan of the <a href="https://en.wikipedia.org/wiki/New_York_Knicks">New York Knicks</a>. 
+                He became hooked on the team in the 90s, although their many playoff upsets have often frustrated him. 
+                His favorite player was <a href="https://en.wikipedia.org/wiki/Allan_Houston">Allan Houston</a>, the Knicks' shooting guard. 
+                He also admired <a href="https://en.wikipedia.org/wiki/John_Starks">John Starks</a>, the team's point guard, and his determined spirit, despite the many defeats he endured.</p>
+            <img src="images/houston.jpg" alt="Allan Houston">
+        </div>
+    </div>
+
+    <!-- Blackburn Rovers FC Section -->
+    <div class="section football" id="blackburn-section">
+        <center><img src="images/blackburn.png" onclick="toggleVisibility('blackburn-content')" alt="Blackburn Rovers FC"></center>
+        <div id="blackburn-content" class="hidden">
+            <p>As a teenager, Boaz's favorite football teams were English. <a href="https://en.wikipedia.org/wiki/Alan_Shearer">Alan Shearer</a> was his favorite footballer, 
+                and Boaz followed Shearer’s teams with great enthusiasm: 
+                <a href="https://en.wikipedia.org/wiki/Blackburn_Rovers_F.C.">Blackburn Rovers</a> and, later, <a href="https://en.wikipedia.org/wiki/Newcastle_United_F.C.">Newcastle United</a>. 
+                Just like with the Knicks, Boaz never abandoned both of these teams; 
+                he continued to support and follow their games even when they were relegated from the Premier League to the Championship League.</p>
+            <div class="flex-container">
+                <img src="images/newcastle.png" alt="Newcastle United">
+                <img src="images/shearer.jpg" alt="Alan Shearer">
+            </div>
+        </div>
+    </div>
+
+    <!-- Acro Yoga Section -->
+    <div class="section acro" id="acro-section">
+        <center><img src="images/handstand2.jpg" onclick="toggleVisibility('acro-content')" alt="Acro Yoga"></center>
+        <div id="acro-content" class="hidden">
+            <p>In the last decade of his life, Boaz immersed himself in Acro Yoga. 
+                He built his strength and became a vibrant part of the Acro Yoga community, 
+                where he discovered both challenges and lasting friendships.</p>
+            <img src="images/acrosun.jpg" style="width: 700px;" alt="Acro in the sun">
+            <br/><br/>
+            <video class="video" controls>
+                <source src="images/acro.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <video class="video" style="height: 500px;" controls>
+                <source src="images/handstand.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+
+        </div>
+    </div>
+
+    <script>
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>

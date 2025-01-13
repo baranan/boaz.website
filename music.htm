@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background-color: rgba(121, 122, 122, 0.301);
+}
+
+.links {
+  position: absolute;
+  top: 10px;
+  left: 55%;
+  text-decoration: none;
+  color: #0816e2;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.storya {
+  position: absolute;
+  top: 10px;
+  right: 55%;
+  text-decoration: none;
+  color: #0816e2;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+/* Style for the modal window */
+.modallinks {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Ensure it appears on top of other content */
+  padding: 10px;
+  background-color: #a1a1e5;
+  border: 3px solid #0f0f0f;
+  width: 300px; /* Adjust width as needed */
+  left: 56%;
+  top: 10px;
+  overflow: auto;
+}
+
+/* Style for the modal window */
+.modalstory {
+  display: none; /* Hidden by default */
+  position: fixed;
+  z-index: 1; /* Ensure it appears on top of other content */
+  padding: 10px;
+  background-color: #a1a1e5;
+  border: 3px solid #0f0f0f;
+  width: 500px; /* Adjust width as needed */
+  right: 56%;
+  top: 10px;
+  overflow: auto;
+}
+
+/* Style for the close button */
+.close-modallinks {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  text-decoration: none;
+  color: #333;
+  font-weight: bold;
+}
+
+
+.close-left {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  color: #000000ab;
+  font-size: 0.8em;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close-right {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  color: #000000ab;
+  font-size: 0.8em;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close-bottom-right {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  color: #000000ab;
+  font-size: 0.8em;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+
+.cursor {
+  cursor: pointer;
+}
+
+.lyricsLink {
+  position: relative;
+    left: 25%;
+    display: inline-block;
+  }
+
+  .modalLyrics {
+    display: none; /* Hidden by default */
+    position: fixed;
+    z-index: 1; /* Ensure it appears on top of other content */
+    padding: 10px;
+    background-color: #ffffff;
+    border: 3px solid #0f0f0f;
+    width: 500px; /* Adjust width as needed */
+    left: 26%;
+    bottom: 5%;
+    line-height: 1.6;
+    font-family: cursive;
+    overflow: auto;
+  }
+
+  /* Modal Content */
+  .modalLyrics .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+  }
+
+  /* The Close Button */
+  .modalLyrics .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .modalLyrics .close:hover,
+  .modalLyrics .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .rounded-link {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #b49530;
+    border-radius: 25px;
+    text-decoration: none;
+    color: black;
+  }
+
+  .rounded-link:hover {
+    background-color: #ddd;
+  }
+
+  .rounded-link-blue {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #f1ee1e; /* white background */
+    border-radius: 25px;
+    text-decoration: underline; /* underline */
+    color: blue; /* blue font */
+  }
+
+  .center {
+   display: flex;
+   justify-content: center;
+  }
+</style>
+</head>
+<body>
+
+<div style="background: url('images/musicicon3.jpg') repeat; width: 100%; height: 100%; position: fixed; top: 0; left: 0; z-index:-1;"></div>
+
+
+    <div><img src="images/boaz.headphones.jpg" alt="Boaz and music" style="display:block; margin: auto; width:100px;"/></div>
+
+  <a href="#modal" class="links rounded-link">Links to Boaz's Videos and Playlists</a>
+
+  <div id="albums" class="modallinks">
+    <h3>Youtube and Spotify</h3>
+    <ul>
+      <li><a href="https://www.youtube.com/@barboaz/playlists">Youtube playlists</a></li>
+      <li><a href="https://www.youtube.com/@barboaz">Youtube channel</a></li>
+      <li><a href="https://open.spotify.com/playlist/47jfOKlWZ2LwgDj8BOZJ2Z?si=ca51e622ff5d485c">Spotify Liked (playlist)</a></li>
+      <li><a href="https://open.spotify.com/playlist/3DTRQ540zty4jbJOX3V0TS?si=f13c419accdf485c">Spotify best of trips (playlist)</a></li>
+      <li><a href="https://open.spotify.com/playlist/7EXSCsTPFwMKEHCFyOfbto?si=202f777392034891">Spotify "Not too heavy" (playlist)</a></li>
+    </ul>
+    <span class="close-left cursor" onclick="closemodallinks()">close</span>
+    <span class="close-right cursor" onclick="closemodallinks()">close</span>
+
+  </div>
+  
+  <a href="#modal" class="storya  rounded-link">בעז ומוזיקה</a>
+
+  <div id="story" class="modalstory">
+    <!-- text paragraph in Hebrew -->
+    <p style="direction: rtl;">
+      בעז אהב מאוד מוזיקה. 
+הוא הקשיב למוזיקה מנגן mp3 ולא מהטלפון, 
+והוא הקפיד על קבצי מוזיקה באיכות טובה ככל האפשר.
+הוא אסף שירים ממקורות רבים, וצירף אותם לפלייליסט לבדיקת שירים חדשים.
+<br/><br/>
+בעז אהב להקשיב למוזיקה בבית, ברכיבה באופניים, ובהופעות חיות. 
+אחת ההנאות הגדולות ביותר בחייו היתה להאזין למוזיקה תחת השפעת אלאסדי. 
+חברים ומשפחה היו מקבלים ממנו פלייליסטים ליום הולדת.
+<br/><br/>
+בארוחות משפחתיות בימי שישי, אהבנו להקשיב לכאן שם ובכל מקום, בעידודו של בעז. 
+הוא אהב להיות מופתע לטובה מהמוזיקה בתוכנית ולהפעיל שאזאם בכל פעם שהופתע. 
+<br/><br/>
+שנים אחרי מותו, אנחנו עדיין לא מצליחים להקשיב למוזיקה טובה בלי לבכות על כך שכבר אי-אפשר לחלוק אותה עם בעז.
+<br/><br/>
+בעמוד הזה, תמצאו שתיים מהלהקות האהובות על בעז, וקישורים לערוץ היוטיוב שבו פלייליסטים שהכין ושירים שהעלה ליוטיוב. 
+תמצאו גם קישורים לפלייליסטים שבעז הכין לעצמו בספוטיפיי.
+    </p>
+    <span class="close-right cursor" onclick="closestorymodal()">close</span>
+    <span class="close-left cursor" onclick="closestorymodal()">close</span>
+  </div>
+
+
+  <h2 style="text-align:center"><a class="rounded-link-blue" style="text-align:center"" target="_blank" href="https://en.wikipedia.org/wiki/Built_to_Spill">Built to Spill</a></h2>
+  <div style="text-align:center"><iframe style="display:block; margin: auto;" width="560" height="315" src="https://www.youtube.com/embed/videoseries?si=rjFk7gSR1guoUE4N&amp;list=PLLaAy4GRUfyYOli0P7dILCZ7U1kL48Mzs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+  
+  <h2 style="text-align:center"><a class="rounded-link-blue" target="_blank" href="https://tatranmusic.bandcamp.com/">TATRAN</a></h2>
+  <div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube.com/embed/ODg7bnRtlfU?si=_ebAS8TZEGLSavbh" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+  <br/>
+  <div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube.com/embed/V7MYbosKGjA?si=4OyDin-DJfaootGB" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+
+  <div class="center">
+    <h2 style="text-align:center; color:black; background-color: #ffffff; width:10%;">More</h2>
+  </div>
+  <div style="text-align:center"><iframe width="560" height="315" src="https://www.youtube.com/embed/3pVUwfpTx3c?si=2Tle4Am6PThhRz0x" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div>
+
+  <a href="#modalLyrics" class="lyricsLink  rounded-link">You were right</a>
+
+  <!-- Add this modal window anywhere in your HTML -->
+  <div id="lyrics" class="modalLyrics">
+    <p style="text-align: center;">
+      <b>You were right / Built to Spill</b>
+    </p>
+    <p>    
+      You were wrong when you said everything's gonna be alright<br/>
+      You were wrong when you said everything's gonna be alright<br/>
+      You were right when you said all that glitters isn't gold<br/>
+      You were right when you said all we are is dust in the wind<br/>
+      You were right when you said we're all just bricks in the wall<br/>
+      And when you said manic depression's a frustrated mess<br/>
+      You were wrong when you said everything's gonna be alright<br/>
+      You were wrong when you said everything's gonna be alright<br/>
+      You were wrong when you said everything's gonna be alright<br/>
+      You were right when you said you can't always get what you want<br/>
+      You were right when you said it's a hard rain's gonna fall<br/>
+      You were right when you said were still running against the wind<br/>
+      Life goes on long after the thrill of living is gone<br/>
+      You were right when you said this is the end<br/>
+      Do you ever think about it?<br/>
+      Do you ever think about it?<br/>
+      Do you ever think about it?<br/>
+      Do you ever think about it?<br/>
+    </p>
+    <span class="close-right cursor" onclick="closelyricsmodal()">close</span>
+    <span class="close-left cursor" onclick="closelyricsmodal()">close</span>
+    <span class="close-bottom-right cursor" onclick="closelyricsmodal()">close</span>
+  </div>
+  
+<script>
+
+const story = document.getElementById("story");
+const storya = document.querySelector(".storya");
+
+storya.addEventListener("click", () => {
+  story.style.display = "block";
+});
+
+function closestorymodal() {
+  story.style.display = "none";
+}
+
+// JavaScript for opening and closing the links modal
+const links = document.querySelector(".links");
+const albums = document.getElementById("albums");
+
+links.addEventListener("click", () => {
+  albums.style.display = "block";
+});
+
+function closemodallinks() {
+  albums.style.display = "none";
+}
+
+// Get the modal
+const lyricsLink = document.querySelector(".lyricsLink");
+const lyrics = document.getElementById("lyrics");
+
+// When the user clicks the link, open the modal 
+lyricsLink.onclick = function() {
+  lyrics.style.display = "block";
+}
+
+function closelyricsmodal() {
+  lyrics.style.display = "none";
+}
+
+</script>
+
+</body>
+</html>

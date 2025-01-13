@@ -1,0 +1,170 @@
+body {
+	font-family: Arial, sans-serif;
+	margin: 0;
+	padding: 0;
+}
+
+header {
+	background-color: #changeRoadColor;
+	color: #fff;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	height: 150px;
+}
+header h1 span {
+    background-color: black;
+    padding: 5px;
+}
+header img {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 50px;
+}
+
+nav ul {
+	display: flex;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+nav li {
+	margin: 0 10px;
+}
+
+nav a {
+	color: #000;
+	text-decoration: none;
+	font-size: 18px;
+	padding: 10px;
+}
+
+nav a:hover {
+	color: #ccc;
+	background-color: #333;
+	border-radius: 5px;
+}
+
+main {
+	margin: 20px;
+}
+
+topnav {
+  overflow: hidden;
+  background-color: #333;
+}
+
+
+.card-container {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	gap: 20px; /* adjust this to change the space between the cards */
+}
+
+.card {
+	background-color: rgba(221, 221, 221, 0.1); /* #ddd with 50% opacity */
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+	border-radius: 5px;
+	padding: 20px;
+	width: calc((100% - 60px) / 3); /* three cards per row with margins */
+	height: 150px; /* set the height of the cards */
+	position: relative; /* to position the tooltip relative to the card */
+	text-align: center; /* center the contents of the card */
+	cursor: pointer; /* change the cursor to a hand on hover*/
+}
+
+.card:hover {
+	background-color: rgba(221, 221, 221, 0.8); /* #ddd with 70% opacity on hover */
+}
+
+.card:hover .tooltip::before {
+	content: attr(data-tooltip);
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 5px;
+	background-color: #333;
+	color: #fff;
+	border-radius: 5px;
+	font-size: 14px;
+	opacity: 0;
+	transition: opacity 0.3s;
+  }
+  
+  .card:hover .tooltip::before {
+	opacity: 1;
+  }
+
+.card h2 {
+	margin-top: 55px; /* set the margin to position the title */
+	font-size: 34px; /* adjust this value to your liking */
+	font-family: Georgia, serif; /* use Georgia if available, otherwise use any serif font */
+}
+
+.card img {
+	max-height: 100%;
+	max-width: 100%;
+	object-fit: cover; /* resize the image to cover the entire card */
+}
+
+.long-photo {
+	width: 50%;
+	height: auto; /* maintain the aspect ratio of the photo */
+	opacity: 0.5; /* make the photo somewhat transparent */
+	position: absolute; /* position the photo relative to its nearest positioned ancestor */
+	right: 0; /* align the photo to the right */
+	top: 0; /* align the photo to the top */
+	z-index: -1; /* place the photo behind the cards */
+}
+
+.llong-photo {
+	width: 50%;
+	height: auto; /* maintain the aspect ratio of the photo */
+	opacity: 0.5; /* make the photo somewhat transparent */
+	position: absolute; /* position the photo relative to its nearest positioned ancestor */
+	left: 0; /* align the photo to the right */
+	top: 0; /* align the photo to the top */
+	z-index: -1; /* place the photo behind the cards */
+}
+
+.card.empty {
+	visibility: hidden; /* hide the empty card */
+}
+
+.tooltip {
+	position: relative;
+  }
+  
+  .tooltip::before {
+	content: attr(data-tooltip);
+	position: absolute;
+	top: -30px;
+	left: 50%;
+	transform: translateX(-50%);
+	padding: 5px;
+	background-color: #333;
+	color: #fff;
+	border-radius: 5px;
+	font-size: 14px;
+	opacity: 0;
+	transition: opacity 0.3s;
+  }
+  
+  .tooltip:hover::before {
+	opacity: 1;
+  }
+
+
+
+

@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boaz and Food</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .section {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .section img {
+            max-width: 100%;
+            cursor: pointer;
+        }
+        .hidden {
+            display: none;
+        }
+        .video {
+            max-width: 100%;
+        }
+        h1 {
+            text-align: center;
+        }
+        .top-section img {
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+        .top-section video {
+            height: 450px; /* Adjust the width as needed */
+        }
+
+        .burger img {
+            height: 260px; /* Adjust the width as needed */
+            display: block;
+            margin: 0;
+        }
+
+        .bolognese img {
+            width: 650px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        .soylent img {
+            width: 150px; /* Adjust the width as needed */
+            height: auto;
+            display: block;
+            margin: 0;
+        }
+
+        .flex-container {
+            display: flex;
+            gap: 10px; /* Adjust the gap as needed */
+        }
+</style>
+</head>
+<body>
+    <h1>Boaz and Sport</h1>
+
+    <!-- Top Section -->
+    <div class="section top-section" id="top-section">
+        <center><img src="images/boaz.food.jpg" onclick="toggleVisibility('top-content')" alt="Boaz Photo"></center>
+        <div id="top-content" class="hidden">
+            <p>Boaz was very picky about food, avoiding most dishes and only enjoying a small selection of foods.</p>
+        </div>
+    </div>
+
+    <!-- Meat Section -->
+    <div class="section burger" id="burger-section">
+        <center><img src="images/burger3.jpg" onclick="toggleVisibility('burger-content')" alt="Burgers"></center>
+        <div id="burger-content" class="hidden">
+            <p>Boaz liked hamburgers. When he visited Yoav and Amit in NYC in 2016, he decided to visit all the burger joints in Timeout's list of top Burgers in NYC. 
+                Sometimes, that required him of eating a burger for lunch and burger for dinner. He managed. 
+                More generally, Boaz liked meat and cheese, and that's pretty much it.
+                Below are some meat photos from his Google Photos album.</p>
+                <div class="flex-container">
+                    <img src="images/burger1.jpg" alt="Burger">
+                    <img src="images/burger3.jpg" alt="Burger">
+                    <img src="images/meat1.jpg" alt="Meat">
+                </div>
+        </div>
+    </div>
+
+    <!-- spaghetti bolognese Section -->
+    <div class="section bolognese" id="bolognese-section">
+        <center><img src="images/spaghetti.jpg" onclick="toggleVisibility('bolognese-content')" alt="spaghetti bolognese"></center>
+        <div id="bolognese-content" class="hidden">
+            <p>Boaz's favorite food was spaghetti bolognese. Mon used to make him enough to last him a couple of weeks, and he would eat it every day. 
+                He has videotaped Mon making it, believing that he would need to make it himself one day (crisis averted). 
+                Because he could not eat spaghetti bolognese twice a day, he had to find other foods to eat when at home. The other food was spaghetti with ketchup. 
+                Here is his plate after eating spaghetti bolognese.</p>
+            <div class="flex-container">
+                <img src="images/spaghetti1.jpg" alt="spaghetti">
+            </div>
+        </div>
+    </div>
+
+    <!-- soylent Yoga Section -->
+    <div class="section soylent" id="soylent-section">
+        <center><img src="images/soylentlogo.png" onclick="toggleVisibility('soylent-content')" alt="soylent Yoga"></center>
+        <div id="soylent-content" class="hidden">
+            <p>Friends and family often badgered Boaz about his diet, arguing that it might not be ideal to live only on spaghetti bolognese and burgers. 
+                Boaz frequently wondered whether unhealthy food was harming him throughout his life, 
+                or if he can enjoy meat for now, and focus on healthier diet later. 
+                <br/><br/>
+                Tired of the constant nagging, he longed for a simple, elegant solution. 
+                That's where Soylent came in. Soylent was designed to provide all the nutrients one needs in a single artificial food.
+                <br/><br/>
+                The only problem was that Soylent didn’t ship to Israel. As a result, Boaz could only try it occasionally, 
+                whenever someone close to him was in the U.S. and could bring some back. Well, the other problem was that Soylent tasted pretty awful, 
+                and Boaz's whole idea was to avoid having to deal with unappetizing healthy food.
+                <br/><br/>                
+                In the end, Boaz was right. He managed to live on bolognese and burgers, and it didn’t harm his health or have any negative effects.</p>
+            <img src="images/soylent.jpg" style="width: 700px;" alt="soylent in the sun">
+        </div>
+    </div>
+
+    <script>
+        function toggleVisibility(id) {
+            var element = document.getElementById(id);
+            if (element.classList.contains('hidden')) {
+                element.classList.remove('hidden');
+            } else {
+                element.classList.add('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
