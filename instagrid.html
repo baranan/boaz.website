@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Boaz</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Raleway:wght@200;300&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0e0c0a;
+      --gold: #c9a84c;
+      --gold-dim: #7a6230;
+      --text: #e8dfc8;
+      --text-dim: #7a7060;
+      --viewer-bg: #080706;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 200;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      overflow-x: hidden;
+    }
+
+    /* ── Header ── */
+    header {
+      text-align: center;
+      padding: 64px 24px 40px;
+      position: relative;
+    }
+    header::after {
+      content: '';
+      display: block;
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 32px auto 0;
+      opacity: 0.6;
+    }
+    .eyebrow {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+    h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      letter-spacing: 0.04em;
+      line-height: 1.15;
+      color: var(--text);
+    }
+    h1 em {
+      font-style: italic;
+      color: var(--gold);
+    }
+    .subtitle {
+      margin-top: 16px;
+      font-size: 0.8rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+    }
+
+    /* ── Hint bar ── */
+    .hint {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      display: flex;
+      gap: 28px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .hint span { display: flex; align-items: center; gap: 7px; }
+    .hint svg { opacity: 0.5; }
+
+    /* ── Viewer wrapper ── */
+    #viewer-wrap {
+      width: 100%;
+      max-width: 1400px;
+      margin: 0 auto 16px;
+      padding: 0 16px;
+    }
+    #viewer {
+      width: 100%;
+      aspect-ratio: 10 / 12;
+      background: var(--viewer-bg);
+      border: 1px solid #2a2520;
+      overflow: hidden;
+      cursor: grab;
+      position: relative;
+      touch-action: none;
+      box-shadow: 0 0 80px rgba(0,0,0,0.8);
+    }
+    #viewer.grabbing { cursor: grabbing; }
+    #viewer img {
+      position: absolute;
+      top: 0; left: 0;
+      transform-origin: 0 0;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+      image-rendering: auto;
+      /* fade in once loaded */
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+    #viewer img.loaded { opacity: 1; }
+
+    /* loading overlay */
+    #loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      color: var(--text-dim);
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      pointer-events: none;
+      transition: opacity 0.5s;
+    }
+    #loading.hidden { opacity: 0; }
+    .spinner {
+      width: 32px; height: 32px;
+      border: 1px solid var(--gold-dim);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      justify-content: center;
+      margin: 20px 0 48px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      background: transparent;
+      border: 1px solid var(--gold-dim);
+      color: var(--gold);
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      padding: 10px 22px;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--bg);
+    }
+    .btn.icon-btn {
+      padding: 10px 16px;
+      font-size: 1rem;
+      letter-spacing: 0;
+    }
+    #zoom-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      color: var(--text-dim);
+      min-width: 52px;
+      text-align: center;
+    }
+
+    /* ── Footer ── */
+    footer {
+      margin-top: auto;
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 0.65rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      border-top: 1px solid #1e1c18;
+      width: 100%;
+    }
+    footer em {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 0.85rem;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Boaz</h1>
+  <p class="subtitle">120 instagram photos</p>
+</header>
+
+<p class="hint">
+  <span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/><path d="M11 8v6M8 11h6"/></svg>
+    Scroll up or pinch to zoom
+  </span>
+  <span>
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+    Drag to pan
+  </span>
+  <button class="btn icon-btn" id="btn-out" title="Zoom out">−</button>
+  <span id="zoom-label">100%</span>
+  <button class="btn icon-btn" id="btn-in" title="Zoom in">+</button>
+  <button class="btn" id="btn-fit">Fit</button>
+  <button class="btn" id="btn-reset">1:1</button>
+</p>
+
+<div id="viewer-wrap">
+  <div id="viewer">
+    <div id="loading">
+      <div class="spinner"></div>
+      <span>Loading photographs…</span>
+    </div>
+    <img id="grid-img" src="images/grid_output.jpg" alt="Memorial photo grid" draggable="false"/>
+  </div>
+</div>
+
+<script>
+  const viewer = document.getElementById('viewer');
+  const img    = document.getElementById('grid-img');
+  const loading = document.getElementById('loading');
+  const zoomLabel = document.getElementById('zoom-label');
+
+  // Natural image dimensions (known: 14400 x 17280)
+  // We'll read them from the image once loaded
+  let natW = 14400, natH = 17280;
+
+  let scale = 1;
+  let ox = 0, oy = 0;   // offset in screen px
+
+  // ── Fit to viewer ──
+  function fitScale() {
+    const vw = viewer.clientWidth;
+    const vh = viewer.clientHeight;
+    return Math.min(vw / natW, vh / natH);
+  }
+
+  function applyTransform(animate) {
+    if (animate) img.style.transition = 'transform 0.25s ease';
+    else img.style.transition = 'none';
+    img.style.transform = `translate(${ox}px, ${oy}px) scale(${scale})`;
+    zoomLabel.textContent = Math.round(scale * 100) + '%';
+  }
+
+  function clampOffset() {
+    const vw = viewer.clientWidth;
+    const vh = viewer.clientHeight;
+    const iw = natW * scale;
+    const ih = natH * scale;
+    // Clamp so image fills viewer (no grey gaps unless image is smaller than viewer)
+    const minX = Math.min(0, vw - iw);
+    const minY = Math.min(0, vh - ih);
+    ox = Math.max(minX, Math.min(0, ox));
+    oy = Math.max(minY, Math.min(0, oy));
+  }
+
+  function zoomTo(newScale, cx, cy) {
+    // cx, cy: focal point in viewer coords
+    newScale = Math.max(fitScale(), Math.min(newScale, 10));
+    const ratio = newScale / scale;
+    ox = cx - ratio * (cx - ox);
+    oy = cy - ratio * (cy - oy);
+    scale = newScale;
+    clampOffset();
+    applyTransform(false);
+  }
+
+  function init() {
+    natW = img.naturalWidth  || 14400;
+    natH = img.naturalHeight || 17280;
+    scale = fitScale();
+    const vw = viewer.clientWidth;
+    const vh = viewer.clientHeight;
+    ox = (vw - natW * scale) / 2;
+    oy = (vh - natH * scale) / 2;
+    clampOffset();
+    applyTransform(false);
+  }
+
+  img.addEventListener('load', () => {
+    img.classList.add('loaded');
+    loading.classList.add('hidden');
+    init();
+  });
+  // If already cached
+  if (img.complete && img.naturalWidth) {
+    img.classList.add('loaded');
+    loading.classList.add('hidden');
+    init();
+  }
+
+  window.addEventListener('resize', () => { init(); });
+
+  // ── Mouse wheel zoom ──
+  viewer.addEventListener('wheel', e => {
+    e.preventDefault();
+    const rect = viewer.getBoundingClientRect();
+    const cx = e.clientX - rect.left;
+    const cy = e.clientY - rect.top;
+    const delta = e.deltaY < 0 ? 1.12 : 1 / 1.12;
+    zoomTo(scale * delta, cx, cy);
+  }, { passive: false });
+
+  // ── Mouse drag ──
+  let dragging = false, dragX = 0, dragY = 0;
+  viewer.addEventListener('mousedown', e => {
+    dragging = true;
+    dragX = e.clientX; dragY = e.clientY;
+    viewer.classList.add('grabbing');
+  });
+  window.addEventListener('mousemove', e => {
+    if (!dragging) return;
+    ox += e.clientX - dragX;
+    oy += e.clientY - dragY;
+    dragX = e.clientX; dragY = e.clientY;
+    clampOffset();
+    applyTransform(false);
+  });
+  window.addEventListener('mouseup', () => {
+    dragging = false;
+    viewer.classList.remove('grabbing');
+  });
+
+  // ── Touch pinch + drag ──
+  let touches = [];
+  let lastDist = 0;
+  viewer.addEventListener('touchstart', e => {
+    e.preventDefault();
+    touches = Array.from(e.touches);
+    if (touches.length === 2) {
+      const dx = touches[0].clientX - touches[1].clientX;
+      const dy = touches[0].clientY - touches[1].clientY;
+      lastDist = Math.hypot(dx, dy);
+    }
+  }, { passive: false });
+
+  viewer.addEventListener('touchmove', e => {
+    e.preventDefault();
+    const t = Array.from(e.touches);
+    if (t.length === 1 && touches.length === 1) {
+      ox += t[0].clientX - touches[0].clientX;
+      oy += t[0].clientY - touches[0].clientY;
+      clampOffset();
+      applyTransform(false);
+    } else if (t.length === 2) {
+      const dx = t[0].clientX - t[1].clientX;
+      const dy = t[0].clientY - t[1].clientY;
+      const dist = Math.hypot(dx, dy);
+      const rect = viewer.getBoundingClientRect();
+      const cx = (t[0].clientX + t[1].clientX) / 2 - rect.left;
+      const cy = (t[0].clientY + t[1].clientY) / 2 - rect.top;
+      zoomTo(scale * (dist / lastDist), cx, cy);
+      lastDist = dist;
+    }
+    touches = t;
+  }, { passive: false });
+
+  viewer.addEventListener('touchend', e => {
+    touches = Array.from(e.touches);
+  });
+
+  // ── Buttons ──
+  document.getElementById('btn-in').addEventListener('click', () => {
+    const cx = viewer.clientWidth / 2, cy = viewer.clientHeight / 2;
+    zoomTo(scale * 1.4, cx, cy);
+    applyTransform(true);
+  });
+  document.getElementById('btn-out').addEventListener('click', () => {
+    const cx = viewer.clientWidth / 2, cy = viewer.clientHeight / 2;
+    zoomTo(scale / 1.4, cx, cy);
+    applyTransform(true);
+  });
+  document.getElementById('btn-fit').addEventListener('click', () => { init(); applyTransform(true); });
+  document.getElementById('btn-reset').addEventListener('click', () => {
+    scale = 1;
+    ox = (viewer.clientWidth  - natW) / 2;
+    oy = (viewer.clientHeight - natH) / 2;
+    clampOffset();
+    applyTransform(true);
+  });
+</script>
+</body>
+</html>
